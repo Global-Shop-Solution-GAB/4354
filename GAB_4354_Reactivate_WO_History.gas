@@ -1,0 +1,244 @@
+Program.Sub.ScreenSU.Start
+Gui.frmWO..create
+Gui.frmWO..caption("Activate Work Orders From History")
+Gui.frmWO..size(5370,1875)
+Gui.frmWO..minx(0)
+Gui.frmWO..miny(0)
+Gui.frmWO..position(0,0)
+Gui.frmWO..event(UnLoad,Unload_Form)
+Gui.frmWO..alwaysontop(False)
+Gui.frmWO..fontname("Arial")
+Gui.frmWO..fontsize(8)
+Gui.frmWO..forecolor(0)
+Gui.frmWO..fontstyle()
+Gui.frmWO..BackColor(-2147483633)
+Gui.frmWO..controlbox(True)
+Gui.frmWO..maxbutton(False)
+Gui.frmWO..minbutton(True)
+Gui.frmWO..mousepointer(0)
+Gui.frmWO..moveable(True)
+Gui.frmWO..sizeable(False)
+Gui.frmWO..ShowInTaskBar(True)
+Gui.frmWO..titlebar(True)
+Gui.frmWO.cmdJobExc.create(button)
+Gui.frmWO.cmdJobExc.caption("Execute")
+Gui.frmWO.cmdJobExc.visible(True)
+Gui.frmWO.cmdJobExc.size(795,375)
+Gui.frmWO.cmdJobExc.zorder(0)
+Gui.frmWO.cmdJobExc.position(135,840)
+Gui.frmWO.cmdJobExc.enabled(True)
+Gui.frmWO.cmdJobExc.fontname("Arial")
+Gui.frmWO.cmdJobExc.fontsize(8)
+Gui.frmWO.cmdJobExc.event(Click,Update_ByWO)
+Gui.frmWO.cmdJobExc.defaultvalue("")
+Gui.frmWO.cmdJobExc.controlgroup(0)
+Gui.frmWO.cmdJobExc.tabstop(True)
+Gui.frmWO.cmdJobExc.tabindex(6)
+Gui.frmWO.txtSuf.create(textbox,"",True,510,300,0,1425,345,True,0,Arial,8,-2147483643,1)
+Gui.frmWO.txtSuf.maxLength(3)
+Gui.frmWO.txtSuf.defaultvalue("")
+Gui.frmWO.txtSuf.controlgroup(0)
+Gui.frmWO.txtSuf.tabstop(True)
+Gui.frmWO.txtSuf.tabindex(4)
+Gui.frmWO.cmdJobBrw.create(button)
+Gui.frmWO.cmdJobBrw.caption("^")
+Gui.frmWO.cmdJobBrw.visible(True)
+Gui.frmWO.cmdJobBrw.size(375,300)
+Gui.frmWO.cmdJobBrw.zorder(0)
+Gui.frmWO.cmdJobBrw.position(2100,330)
+Gui.frmWO.cmdJobBrw.enabled(True)
+Gui.frmWO.cmdJobBrw.fontname("Arial")
+Gui.frmWO.cmdJobBrw.fontsize(8)
+Gui.frmWO.cmdJobBrw.event(Click,cmd_click_JobBrowser)
+Gui.frmWO.cmdJobBrw.defaultvalue("")
+Gui.frmWO.cmdJobBrw.controlgroup(0)
+Gui.frmWO.cmdJobBrw.tabstop(True)
+Gui.frmWO.cmdJobBrw.tabindex(5)
+Gui.frmWO.txtJob.create(textbox,"",True,1215,300,0,105,345,True,0,Arial,8,-2147483643,1)
+Gui.frmWO.txtJob.maxLength(6)
+Gui.frmWO.txtJob.defaultvalue("")
+Gui.frmWO.txtJob.controlgroup(0)
+Gui.frmWO.txtJob.tabstop(True)
+Gui.frmWO.txtJob.tabindex(3)
+Gui.frmWO.lblWO.Create(Label,"Work Order",True,1935,255,0,120,120,True,0,"Arial",8,-2147483633,0)
+Gui.frmWO.lbSuf.Create(Label,"Suffix",True,540,255,0,1425,120,True,0,"Arial",8,-2147483633,0)
+Program.Sub.ScreenSU.End
+
+Program.Sub.Preflight.Start
+Program.Sub.Preflight.End
+
+Program.Sub.Main.Start
+	F.Intrinsic.Control.Try
+	V.Local.sError.Declare
+	
+	'This will allow the reactivation of jobs from histoy on Global Shop versions 2015.1 and higher
+
+	F.ODBC.Connection!conx.OpenConnection(V.Ambient.PDSN,V.Ambient.PUser,V.Ambient.PPass,300)
+	F.Intrinsic.Control.If(V.Caller.GSSVersion,>,2016.1)
+		Gui.frmWO..Show
+	F.Intrinsic.Control.Else
+		F.Intrinsic.UI.Msgbox("You are running an older version than 2016.1. Please update to use this program.","GSS Version Validation")
+		F.Intrinsic.Control.CallSub(Unload_form)
+	F.Intrinsic.Control.EndIf
+	
+	F.Intrinsic.Control.Catch
+		F.Intrinsic.String.Build("Project: GAB_4354_Reactivate_WO_History.gas{0}{0}Subroutine: {1}{0}Error Occurred {2} with description {3}.",V.Ambient.Newline,V.Ambient.CurrentSubroutine,V.Ambient.ErrorNumber,V.Ambient.ErrorDescription,V.Local.sError)
+		F.Intrinsic.UI.Msgbox(V.Local.sError)
+		F.Intrinsic.Control.End 
+	F.Intrinsic.Control.EndTry
+Program.Sub.Main.End
+
+Program.Sub.Unload.Start
+	F.Intrinsic.Control.Try
+	V.Local.sError.Declare
+	
+	V.Local.sMsg.Declare(String)
+	V.Local.iRet.Declare(Long)
+
+	F.Intrinsic.UI.Msgbox("Do you want to Reactivate more Work Orders?","Reactivate Work Orders",4,V.Local.iRet)
+	F.Intrinsic.Control.If(V.Local.iRet,=,6)
+		Gui.frmWO.txtJob.Text("")
+		Gui.frmWO.txtSuf.Text("")
+		Gui.frmWO..Show
+	F.Intrinsic.Control.Else
+		F.ODBC.Connection!conx.Close
+		F.Intrinsic.Control.End 
+	F.Intrinsic.Control.EndIf
+	
+	F.Intrinsic.Control.Catch
+		F.Intrinsic.String.Build("Project: GAB_4354_Reactivate_WO_History.gas{0}{0}Subroutine: {1}{0}Error Occurred {2} with description {3}.",V.Ambient.Newline,V.Ambient.CurrentSubroutine,V.Ambient.ErrorNumber,V.Ambient.ErrorDescription,V.Local.sError)
+		F.Intrinsic.UI.Msgbox(V.Local.sError)
+		F.Intrinsic.Control.End 
+	F.Intrinsic.Control.EndTry
+Program.Sub.Unload.End
+
+Program.Sub.Update_ByWO.Start
+	F.Intrinsic.Control.Try
+	V.Local.sError.Declare
+	
+	V.Local.sSQL.Declare(String)
+	V.Local.sJob.Declare(String)
+	V.Local.sSuffix.Declare(String)
+	V.Local.sCompMsg.Declare(String)
+	V.Local.sRet.Declare(String)
+
+	'Set Job Variables
+	V.Local.sJob.Set(V.Screen.frmWO!txtJob.text)
+	V.Local.sSuffix.Set(V.Screen.frmWO!txtSuf.text)
+
+	F.Intrinsic.String.Build("SELECT JOB FROM JOB_HIST_MAST WHERE JOB = '{0}' AND SUFFIX = '{1}';",V.Local.sJob,V.Local.sSuffix,V.Local.sSQL)
+	F.ODBC.Connection!conx.ExecuteAndReturn(V.Local.sSQL,V.Local.sRet)
+	F.Intrinsic.Control.If(V.Local.sRet,=,"")
+		F.Intrinsic.UI.Msgbox("The Work Order entered is not in History.","Work Order Validation")
+		Gui.frmWO.txtJob.Text("")
+		Gui.frmWO.txtSuf.Text("")
+	F.Intrinsic.Control.Else
+		Gui.frmWO..Visible(0)
+		F.Intrinsic.UI.InvokeWaitDialog("Starting Reactivation of Jobs....","Reactivate Jobs")
+		'INSERT
+			'JOB_HEADER
+			F.Intrinsic.UI.ChangeWaitStatus("Reactivating Jobs....",8)
+			F.Intrinsic.String.Build("INSERT INTO JOB_HEADER SELECT * FROM JOB_HIST_MAST WHERE JOB = '{0}' AND SUFFIX = '{1}';",V.Local.sJob,V.Local.sSuffix,V.Local.sSQL)
+			F.ODBC.Connection!conx.Execute(V.Local.sSQL)
+			'JOB_OPERATIONS
+			F.Intrinsic.UI.ChangeWaitStatus("Reactivating Jobs....",16)
+			F.intrinsic.String.Build("INSERT INTO JOB_OPERATIONS SELECT * FROM JOB_HIST_OPS WHERE JOB = '{0}' AND SUFFIX = '{1}';",V.Local.sJob,V.Local.sSuffix,V.Local.sSQL)
+			F.ODBC.Connection!conx.Execute(V.Local.sSQL)
+			'JOB_DETAIL
+			F.Intrinsic.UI.ChangeWaitStatus("Reactivating Jobs....",24)
+			F.intrinsic.String.Build("INSERT INTO JOB_DETAIL SELECT * FROM JOB_HIST_DTL WHERE JOB = '{0}' AND SUFFIX = '{1}';",V.Local.sJob,V.Local.sSuffix,V.Local.sSQL)
+			F.ODBC.Connection!conx.Execute(V.Local.sSQL)
+			'JOB_DTL_SUPP
+			F.Intrinsic.UI.ChangeWaitStatus("Reactivating Jobs....",32)
+			F.intrinsic.String.Build("INSERT INTO JOB_DTL_SUPP SELECT * FROM JOB_DTL_SUPP_H WHERE JOB = '{0}' AND SUFFIX = '{1}';",V.Local.sJob,V.Local.sSuffix,V.Local.sSQL)
+			F.ODBC.Connection!conx.Execute(V.Local.sSQL)
+			'JOB_DTL_NOTES
+			F.Intrinsic.UI.ChangeWaitStatus("Reactivating Jobs....",40)
+			F.intrinsic.String.Build("INSERT INTO JOB_DTL_NOTES SELECT * FROM JOB_DTL_H_NOTES WHERE JOB = '{0}' AND SUFFIX = '{1}';",V.Local.sJob,V.Local.sSuffix,V.Local.sSQL)
+			F.ODBC.Connection!conx.Execute(V.Local.sSQL)
+			'WO_SEQ_COMMENTS
+			F.Intrinsic.UI.ChangeWaitStatus("Reactivating Jobs....",48)
+			F.intrinsic.String.Build("INSERT INTO WO_SEQ_COMMENTS SELECT * FROM WO_H_SEQ_COMMENTS WHERE WO = '{0}' AND WO_SUFFIX = '{1}';",V.Local.sJob,V.Local.sSuffix,V.Local.sSQL)
+			F.ODBC.Connection!conx.Execute(V.Local.sSQL)
+		'DELETE
+			'JOB_HIST_MAST
+			F.Intrinsic.UI.ChangeWaitStatus("Removing Jobs from History....",56)
+			F.intrinsic.String.Build("DELETE FROM JOB_HIST_MAST WHERE JOB = '{0}' AND SUFFIX = '{1}';",V.Local.sJob,V.Local.sSuffix,V.Local.sSQL)
+			F.ODBC.Connection!conx.Execute(V.local.sSQL)
+			'JOB_HIST_OPS
+			F.Intrinsic.UI.ChangeWaitStatus("Removing Jobs from History....",64)
+			F.intrinsic.String.Build("DELETE FROM JOB_HIST_OPS WHERE JOB = '{0}' AND SUFFIX = '{1}';",V.Local.sJob,V.Local.sSuffix,V.Local.sSQL)
+			F.ODBC.Connection!conx.Execute(V.local.sSQL)
+			'JOB_HIST_DTL
+			F.Intrinsic.UI.ChangeWaitStatus("Removing Jobs from History....",72)
+			F.intrinsic.String.Build("DELETE FROM JOB_HIST_DTL WHERE JOB = '{0}' AND SUFFIX = '{1}';",V.Local.sJob,V.Local.sSuffix,V.Local.sSQL)
+			F.ODBC.Connection!conx.Execute(V.local.sSQL)
+			'JOB_DTL_SUPP_H
+			F.Intrinsic.UI.ChangeWaitStatus("Removing Jobs from History....",80)
+			F.intrinsic.String.Build("DELETE FROM JOB_DTL_SUPP_H WHERE JOB = '{0}' AND SUFFIX = '{1}';",V.Local.sJob,V.Local.sSuffix,V.Local.sSQL)
+			F.ODBC.Connection!conx.Execute(V.local.sSQL)
+			'JOB_DTL_H_NOTES
+			F.Intrinsic.UI.ChangeWaitStatus("Removing Jobs from History....",88)
+			F.intrinsic.String.Build("DELETE FROM JOB_DTL_H_NOTES WHERE JOB = '{0}' AND SUFFIX = '{1}';",V.Local.sJob,V.Local.sSuffix,V.Local.sSQL)
+			F.ODBC.Connection!conx.Execute(V.Local.sSQL)
+			'WO_H_SEQ_COMMENTS
+			F.Intrinsic.UI.ChangeWaitStatus("Removing Jobs from History....",96)
+			F.intrinsic.String.Build("DELETE FROM WO_H_SEQ_COMMENTS WHERE WO = '{0}' AND WO_SUFFIX = '{1}';",V.Local.sJob,V.Local.sSuffix,V.Local.sSQL)
+			F.ODBC.Connection!conx.Execute(V.Local.sSQL)
+		F.Intrinsic.UI.ChangeWaitStatus("Removing Jobs from History....",98)
+		F.Intrinsic.UI.ChangeWaitStatus("Reactivation Complete....",100)
+		F.Intrinsic.UI.CloseWaitDialog
+		F.Intrinsic.String.Concat("Work Order ",V.Local.sJob,"-",V.Local.sSuffix," is Reactivated.",V.Local.sCompMsg)
+		F.Intrinsic.UI.Msgbox(V.Local.sCompMsg,"Complete")
+		F.Intrinsic.Control.CallSub(Unload)
+	F.Intrinsic.Control.EndIf
+	
+	F.Intrinsic.Control.Catch
+		F.Intrinsic.String.Build("Project: GAB_4354_Reactivate_WO_History.gas{0}{0}Subroutine: {1}{0}Error Occurred {2} with description {3}.",V.Ambient.Newline,V.Ambient.CurrentSubroutine,V.Ambient.ErrorNumber,V.Ambient.ErrorDescription,V.Local.sError)
+		F.Intrinsic.UI.Msgbox(V.Local.sError)
+		F.Intrinsic.Control.End 
+	F.Intrinsic.Control.EndTry
+Program.Sub.Update_ByWO.End
+
+Program.Sub.cmd_click_JobBrowser.Start
+	F.Intrinsic.Control.Try
+	V.Local.sError.Declare
+	
+	Variable.Local.sRet.Declare(String)
+	Variable.Local.sTemp.Declare(String)
+	Variable.Local.sTitles.Declare(String)
+	Variable.Local.iWidths.Declare(Long)
+
+	F.Intrinsic.String.Split("Job*!*Suffix*!*Part*!*Description*!*Customer*!*Date Closed","*!*",Variable.local.sTitles)
+	F.Intrinsic.String.Split("1000*!*800*!*2000*!*3000*!*800*!*1200","*!*",Variable.local.iWidths)
+	F.Intrinsic.UI.Browser("Select a Work Order: ","conx","Select Job, Suffix, Part, Description, Customer, Date_Closed From V_JOB_HIST_MAST;",Variable.Local.sTitles,Variable.Local.iWidths,Variable.Local.sRet)
+	F.Intrinsic.Control.If(Variable.Local.sRet,<>,"***CANCEL***")
+		F.Intrinsic.String.Split(Variable.Local.sRet,"*!*",Variable.Local.sRet)
+		Gui.frmWO.txtJob.text(V.Local.sRet(0))
+		Gui.frmWO.txtSuf.Text(V.Local.sRet(1))
+	F.Intrinsic.Control.EndIf
+	
+	F.Intrinsic.Control.Catch
+		F.Intrinsic.String.Build("Project: GAB_4354_Reactivate_WO_History.gas{0}{0}Subroutine: {1}{0}Error Occurred {2} with description {3}.",V.Ambient.Newline,V.Ambient.CurrentSubroutine,V.Ambient.ErrorNumber,V.Ambient.ErrorDescription,V.Local.sError)
+		F.Intrinsic.UI.Msgbox(V.Local.sError)
+		F.Intrinsic.Control.End 
+	F.Intrinsic.Control.EndTry
+Program.Sub.cmd_click_JobBrowser.End
+
+Program.Sub.Unload_Form.Start
+	F.Intrinsic.Control.Try
+	V.Local.sError.Declare
+	
+	F.ODBC.Connection!conx.Close
+	F.Intrinsic.Control.End 
+	
+	F.Intrinsic.Control.Catch
+		F.Intrinsic.String.Build("Project: GAB_4354_Reactivate_WO_History.gas{0}{0}Subroutine: {1}{0}Error Occurred {2} with description {3}.",V.Ambient.Newline,V.Ambient.CurrentSubroutine,V.Ambient.ErrorNumber,V.Ambient.ErrorDescription,V.Local.sError)
+		F.Intrinsic.UI.Msgbox(V.Local.sError)
+		F.Intrinsic.Control.End 
+	F.Intrinsic.Control.EndTry
+Program.Sub.Unload_Form.End
+
+Program.Sub.Comments.Start
+${$0$}$$}$$}$12:00:00 AM$}$False
+Program.Sub.Comments.End
