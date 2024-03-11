@@ -1,0 +1,449 @@
+﻿Program.Sub.ScreenSU.Start
+Gui.frmWO..create(BaseForm)
+Gui.frmWO..caption("Activate Work Orders From History")
+Gui.frmWO..size(6465,2445)
+Gui.frmWO..minx(0)
+Gui.frmWO..miny(0)
+Gui.frmWO..position(0,0)
+Gui.frmWO..event(UnLoad,Unload_Form)
+Gui.frmWO..alwaysontop(False)
+Gui.frmWO..fontname("Arial")
+Gui.frmWO..fontsize(8)
+Gui.frmWO..forecolor(0)
+Gui.frmWO..BackColor(-2147483633)
+Gui.frmWO..controlbox(True)
+Gui.frmWO..maxbutton(False)
+Gui.frmWO..minbutton(True)
+Gui.frmWO..mousepointer(0)
+Gui.frmWO..moveable(True)
+Gui.frmWO..sizeable(False)
+Gui.frmWO..ShowInTaskBar(True)
+Gui.frmWO..titlebar(True)
+Gui.frmWO.cmdJobExc.create(button)
+Gui.frmWO.cmdJobExc.caption("Execute")
+Gui.frmWO.cmdJobExc.visible(True)
+Gui.frmWO.cmdJobExc.size(795,375)
+Gui.frmWO.cmdJobExc.zorder(0)
+Gui.frmWO.cmdJobExc.position(5295,1275)
+Gui.frmWO.cmdJobExc.enabled(True)
+Gui.frmWO.cmdJobExc.fontname("Arial")
+Gui.frmWO.cmdJobExc.fontsize(8)
+Gui.frmWO.cmdJobExc.event(Click,Update_ByWO)
+Gui.frmWO.cmdJobExc.defaultvalue("")
+Gui.frmWO.cmdJobExc.controlgroup(0)
+Gui.frmWO.cmdJobExc.tabstop(True)
+Gui.frmWO.cmdJobExc.tabindex(6)
+Gui.frmWO.chkSearchByProject.Create(CheckBox)
+Gui.frmWO.chkSearchByProject.Enabled(True)
+Gui.frmWO.chkSearchByProject.Visible(True)
+Gui.frmWO.chkSearchByProject.Zorder(0)
+Gui.frmWO.chkSearchByProject.Size(1755,300)
+Gui.frmWO.chkSearchByProject.Position(105,1200)
+Gui.frmWO.chkSearchByProject.Caption("Search by Project")
+Gui.frmWO.chkSearchByProject.FontName("Tahoma")
+Gui.frmWO.chkSearchByProject.FontSize(8.25)
+Gui.frmWO.chkSearchByProject.Event(Change,chkSearchByProject_Change)
+Gui.frmWO.frameByWO.Create(Frame)
+Gui.frmWO.frameByWO.Enabled(True)
+Gui.frmWO.frameByWO.Visible(True)
+Gui.frmWO.frameByWO.Zorder(0)
+Gui.frmWO.frameByWO.Size(6300,795)
+Gui.frmWO.frameByWO.Position(45,150)
+Gui.frmWO.frameByWO.Caption("")
+Gui.frmWO.frameByWO.FontName("Tahoma")
+Gui.frmWO.frameByWO.FontSize(8.25)
+Gui.frmWO.frameByWO.BorderStyle(0)
+Gui.frmWO.lblWO2.Create(Label,"Work Order",True,855,210,0,3555,75,True,0,"Arial",8,-2147483633,0,0)
+Gui.frmWO.lblWO2.BorderStyle(0)
+Gui.frmWO.lblWO2.Parent("frameByWO")
+Gui.frmWO.txtEndSuf.Create(TextBox,"",True,510,300,0,4890,345,True,0,"Tahoma",8.25,,1)
+Gui.frmWO.txtEndSuf.Parent("frameByWO")
+Gui.frmWO.txtEndSuf.Locked(True)
+Gui.frmWO.lbSuf2.Create(Label,"Suffix",True,435,210,0,4890,75,True,0,"Arial",8,-2147483633,0,0)
+Gui.frmWO.lbSuf2.BorderStyle(0)
+Gui.frmWO.lbSuf2.Parent("frameByWO")
+Gui.frmWO.cmdEndWO.Create(Button)
+Gui.frmWO.cmdEndWO.Enabled(True)
+Gui.frmWO.cmdEndWO.Visible(True)
+Gui.frmWO.cmdEndWO.Zorder(0)
+Gui.frmWO.cmdEndWO.Size(525,345)
+Gui.frmWO.cmdEndWO.Position(5580,330)
+Gui.frmWO.cmdEndWO.Caption("")
+Gui.frmWO.cmdEndWO.FontName("Tahoma")
+Gui.frmWO.cmdEndWO.FontSize(8.25)
+Gui.frmWO.cmdEndWO.SvgPicture("icon_browser_color")
+Gui.frmWO.cmdEndWO.Event(Click,cmdEndWO_Click)
+Gui.frmWO.cmdEndWO.ImageAlign(8)
+Gui.frmWO.cmdEndWO.Parent("frameByWO")
+Gui.frmWO.txtEndJob.Create(TextBox,"",True,1215,300,0,3555,345,True,0,"Tahoma",8.25,,1)
+Gui.frmWO.txtEndJob.Parent("frameByWO")
+Gui.frmWO.txtEndJob.Locked(True)
+Gui.frmWO.lbl1.Create(Label,"Thru",True,330,195,0,2925,405,True,0,"Tahoma",8.25,,0,0)
+Gui.frmWO.lbl1.BorderStyle(0)
+Gui.frmWO.lbl1.Parent("frameByWO")
+Gui.frmWO.cmdJobBrw.create(button)
+Gui.frmWO.cmdJobBrw.caption("")
+Gui.frmWO.cmdJobBrw.visible(True)
+Gui.frmWO.cmdJobBrw.size(525,345)
+Gui.frmWO.cmdJobBrw.zorder(0)
+Gui.frmWO.cmdJobBrw.position(2145,330)
+Gui.frmWO.cmdJobBrw.enabled(True)
+Gui.frmWO.cmdJobBrw.fontname("Arial")
+Gui.frmWO.cmdJobBrw.fontsize(8)
+Gui.frmWO.cmdJobBrw.event(Click,cmd_click_JobBrowser)
+Gui.frmWO.cmdJobBrw.defaultvalue("")
+Gui.frmWO.cmdJobBrw.controlgroup(0)
+Gui.frmWO.cmdJobBrw.tabstop(True)
+Gui.frmWO.cmdJobBrw.tabindex(5)
+Gui.frmWO.cmdJobBrw.SvgPicture("icon_browser_color")
+Gui.frmWO.cmdJobBrw.ImageAlign(8)
+Gui.frmWO.cmdJobBrw.Parent("frameByWO")
+Gui.frmWO.txtSuf.create(textbox,"",True,510,300,0,1470,345,True,0,"Tahoma",8.25,,1)
+Gui.frmWO.txtSuf.maxLength(3)
+Gui.frmWO.txtSuf.defaultvalue("")
+Gui.frmWO.txtSuf.controlgroup(0)
+Gui.frmWO.txtSuf.tabstop(True)
+Gui.frmWO.txtSuf.tabindex(4)
+Gui.frmWO.txtSuf.Parent("frameByWO")
+Gui.frmWO.txtSuf.Locked(True)
+Gui.frmWO.txtJob.create(textbox,"",True,1215,300,0,120,345,True,0,"Tahoma",8.25,,1)
+Gui.frmWO.txtJob.maxLength(6)
+Gui.frmWO.txtJob.defaultvalue("")
+Gui.frmWO.txtJob.controlgroup(0)
+Gui.frmWO.txtJob.tabstop(True)
+Gui.frmWO.txtJob.tabindex(3)
+Gui.frmWO.txtJob.Parent("frameByWO")
+Gui.frmWO.txtJob.Locked(True)
+Gui.frmWO.lblWO.Create(Label,"Work Order",True,855,210,0,120,75,True,0,"Arial",8,-2147483633,0,0)
+Gui.frmWO.lblWO.BorderStyle(0)
+Gui.frmWO.lblWO.Parent("frameByWO")
+Gui.frmWO.lbSuf.Create(Label,"Suffix",True,435,210,0,1470,75,True,0,"Arial",8,-2147483633,0,0)
+Gui.frmWO.lbSuf.BorderStyle(0)
+Gui.frmWO.lbSuf.Parent("frameByWO")
+Gui.frmWO.frameByProject.Create(Frame)
+Gui.frmWO.frameByProject.Enabled(True)
+Gui.frmWO.frameByProject.Visible(True)
+Gui.frmWO.frameByProject.Zorder(0)
+Gui.frmWO.frameByProject.Size(2490,750)
+Gui.frmWO.frameByProject.Position(2070,1095)
+Gui.frmWO.frameByProject.Caption("")
+Gui.frmWO.frameByProject.FontName("Tahoma")
+Gui.frmWO.frameByProject.FontSize(8.25)
+Gui.frmWO.frameByProject.BorderStyle(0)
+Gui.frmWO.lbl3.Create(Label,"Project Number",True,1110,195,0,120,150,True,0,"Tahoma",8.25,,0,0)
+Gui.frmWO.lbl3.BorderStyle(0)
+Gui.frmWO.lbl3.Parent("frameByProject")
+Gui.frmWO.txtBegProject.Create(TextBox,"",True,1215,300,0,120,390,True,0,"Tahoma",8.25,,1)
+Gui.frmWO.txtBegProject.Parent("frameByProject")
+Gui.frmWO.txtBegProject.Locked(True)
+Gui.frmWO.cmdBegProject.Create(Button)
+Gui.frmWO.cmdBegProject.Enabled(True)
+Gui.frmWO.cmdBegProject.Visible(True)
+Gui.frmWO.cmdBegProject.Zorder(0)
+Gui.frmWO.cmdBegProject.Size(525,345)
+Gui.frmWO.cmdBegProject.Position(1485,360)
+Gui.frmWO.cmdBegProject.Caption("")
+Gui.frmWO.cmdBegProject.FontName("Tahoma")
+Gui.frmWO.cmdBegProject.FontSize(8.25)
+Gui.frmWO.cmdBegProject.SvgPicture("icon_browser_color")
+Gui.frmWO.cmdBegProject.ImageAlign(8)
+Gui.frmWO.cmdBegProject.Parent("frameByProject")
+Gui.frmWO.cmdBegProject.Event(Click,cmdBegProject_Click)
+Program.Sub.ScreenSU.End
+
+Program.Sub.Preflight.Start
+V.Global.sError.Declare(String)
+
+Program.Sub.Preflight.End
+
+Program.Sub.Main.Start
+'ARC 4353 modification
+'Author: Arturo Almaguer
+'Date: 10/31/22
+'Customer: Haumiller Engineering Company, quote number 13828
+'ARC 4354 modification to add new features such as reactivating a range of WOs by selecting the WOs or the project numbers associated with the WOs.
+'This script is launched off a custom menu item under Shop Floor Control > Administration > Reactivate WOs from History [4354].
+
+F.Intrinsic.Control.Try
+
+	'This will allow the reactivation of jobs from histoy on Global Shop versions 2015.1 and higher
+	F.ODBC.Connection!conx.OpenConnection(V.Ambient.PDSN,V.Ambient.PUser,V.Ambient.PPass,300)
+	F.Intrinsic.Control.If(V.Caller.GSSVersion,>,2016.1)
+		GUI.frmWO.frameByProject.Enabled(False)
+		Gui.frmWO..Show
+	F.Intrinsic.Control.Else
+		F.Intrinsic.UI.Msgbox("You are running an older version than 2016.1. Please update to use this program.","GSS Version Validation")
+		F.Intrinsic.Control.CallSub("Unload_Form")
+	F.Intrinsic.Control.EndIf
+
+F.Intrinsic.Control.Catch
+
+	F.Intrinsic.Control.CallSub(CatchError)
+
+F.Intrinsic.Control.EndTry
+Program.Sub.Main.End
+
+Program.Sub.Update_ByWO.Start
+F.Intrinsic.Control.Try
+
+	V.Local.sSQL.Declare(String)
+	V.Local.sCompMsg.Declare(String)
+	V.Local.sRet.Declare(String)
+	V.Local.sBegJob.Declare(String)
+	V.Local.sBegSuffix.Declare(String)	
+	V.Local.sEndJob.Declare(String)
+	V.Local.sEndSuffix.Declare(String)
+	V.Local.sProject.Declare(String)
+	v.Local.iCounter.Declare(Long)
+	V.Local.sBegWO.Declare(String)
+	V.Local.sEndWO.Declare(String)
+	
+	Gui.frmWO..Visible(0)
+	F.Intrinsic.UI.InvokeWaitDialog("Starting Reactivation of Jobs....","Reactivate Jobs")
+	
+	F.Intrinsic.Control.If(v.Screen.frmWO!chkSearchByProject.Value, =,1)
+
+		'Searching by Project Number
+		V.Local.sProject.Set(V.Screen.frmWO!txtBegProject.Text)
+		F.Intrinsic.String.Build("select RTRIM(JOB) JOB, RTRIM(SUFFIX) SUFFIX from V_JOB_HIST_MAST where PROJECT = '{0}';", V.Local.sProject, V.Local.sSQL)
+	
+	F.Intrinsic.Control.Else
+	
+		'Searching by WO
+		V.Local.sBegJob.Set(V.Screen.frmWO!txtJob.Text)
+		V.Local.sBegSuffix.Set(V.Screen.frmWO!txtSuf.Text)
+		V.Local.sEndJob.Set(V.Screen.frmWO!txtEndJob.Text)
+		V.Local.sEndSuffix.Set(V.Screen.frmWO!txtEndSuf.Text)
+		F.Intrinsic.String.Build("{0}{1}", V.Local.sBegJob, V.Local.sBegSuffix, V.Local.sBegWO)
+		F.Intrinsic.String.Build("{0}{1}", V.Local.sEndJob, V.Local.sEndSuffix, V.Local.sEndWO)
+		
+		F.Intrinsic.String.Build("select RTRIM(JOB) JOB, RTRIM(SUFFIX) SUFFIX, if(SUFFIX <> '', JOB + SUFFIX, JOB) as WO from V_JOB_HIST_MAST where WO between '{0}' and '{1}' order by JOB", V.Local.sBegWO, V.Local.sEndWO, V.Local.sSQL)
+
+	F.Intrinsic.Control.EndIf
+	
+	'Creating dt and looping through all its records
+	f.Data.DataTable.CreateFromSQL("dtWOs", "conx", V.Local.sSQL, True)
+	F.Intrinsic.Control.For(V.Local.iCounter, 0, V.DataTable.dtWOs.RowCount--, 1)
+
+		'Inserting WO into active tables
+		'JOB_HEADER
+		F.Intrinsic.String.Build("INSERT INTO JOB_HEADER SELECT * FROM JOB_HIST_MAST WHERE JOB = '{0}' AND SUFFIX = '{1}';",V.DataTable.dtWOs(V.Local.iCounter).JOB!FieldValTrim, V.DataTable.dtWOs(V.Local.iCounter).SUFFIX!FieldValTrim,V.Local.sSQL)
+		F.ODBC.Connection!conx.Execute(V.Local.sSQL)
+		'JOB_OPERATIONS
+		F.intrinsic.String.Build("INSERT INTO JOB_OPERATIONS SELECT * FROM JOB_HIST_OPS WHERE JOB = '{0}' AND SUFFIX = '{1}';",V.DataTable.dtWOs(V.Local.iCounter).JOB!FieldValTrim, V.DataTable.dtWOs(V.Local.iCounter).SUFFIX!FieldValTrim,V.Local.sSQL)
+		F.ODBC.Connection!conx.Execute(V.Local.sSQL)
+		'JOB_DETAIL
+		F.intrinsic.String.Build("INSERT INTO JOB_DETAIL SELECT * FROM JOB_HIST_DTL WHERE JOB = '{0}' AND SUFFIX = '{1}';",V.DataTable.dtWOs(V.Local.iCounter).JOB!FieldValTrim, V.DataTable.dtWOs(V.Local.iCounter).SUFFIX!FieldValTrim,V.Local.sSQL)
+		F.ODBC.Connection!conx.Execute(V.Local.sSQL)
+		'JOB_DTL_SUPP
+		F.intrinsic.String.Build("INSERT INTO JOB_DTL_SUPP SELECT * FROM JOB_DTL_SUPP_H WHERE JOB = '{0}' AND SUFFIX = '{1}';",V.DataTable.dtWOs(V.Local.iCounter).JOB!FieldValTrim, V.DataTable.dtWOs(V.Local.iCounter).SUFFIX!FieldValTrim,V.Local.sSQL)
+		F.ODBC.Connection!conx.Execute(V.Local.sSQL)
+		'JOB_DTL_NOTES
+		F.intrinsic.String.Build("INSERT INTO JOB_DTL_NOTES SELECT * FROM JOB_DTL_H_NOTES WHERE JOB = '{0}' AND SUFFIX = '{1}';",V.DataTable.dtWOs(V.Local.iCounter).JOB!FieldValTrim, V.DataTable.dtWOs(V.Local.iCounter).SUFFIX!FieldValTrim,V.Local.sSQL)
+		F.ODBC.Connection!conx.Execute(V.Local.sSQL)
+		'WO_SEQ_COMMENTS
+		F.intrinsic.String.Build("INSERT INTO WO_SEQ_COMMENTS SELECT * FROM WO_H_SEQ_COMMENTS WHERE WO = '{0}' AND WO_SUFFIX = '{1}';",V.DataTable.dtWOs(V.Local.iCounter).JOB!FieldValTrim, V.DataTable.dtWOs(V.Local.iCounter).SUFFIX!FieldValTrim,V.Local.sSQL)
+		F.ODBC.Connection!conx.Execute(V.Local.sSQL)
+		
+		'Extra tables
+		'JOB_SERIAL
+		'F.intrinsic.String.Build("INSERT INTO JOB_SERIAL SELECT * FROM JOB_SERIAL_HIS WHERE JOB = '{0}' AND SUFFIX = '{1}';",V.DataTable.dtWOs(V.Local.iCounter).JOB!FieldValTrim, V.DataTable.dtWOs(V.Local.iCounter).SUFFIX!FieldValTrim,V.Local.sSQL)
+		F.intrinsic.String.Build("SELECT * FROM JOB_SERIAL_HIS WHERE JOB = '{0}' AND SUFFIX = '{1}';",V.DataTable.dtWOs(V.Local.iCounter).JOB!FieldValTrim, V.DataTable.dtWOs(V.Local.iCounter).SUFFIX!FieldValTrim,V.Local.sSQL)
+		F.Data.DataTable.CreateFromSQL("dtJobSerial", "conx", V.Local.sSQL)
+		F.Intrinsic.Control.If(V.DataTable.dtJobSerial.RowCount, >, 0)
+			F.Intrinsic.String.Build("insert into JOB_SERIAL (JOB, SUFFIX, SEQUENCE, SERIAL_START, DATE_SERIAL, TIME_SERIAL, SERIAL_END, SERIAL_PREFIX, FLAG_STATUS, FLAG_ACTIVE, JOBS_COUNT, JOBS_REASON, USERID, JOB_MLO, FILLER, LOT, BIN, HEAT, SERIAL, PO, PO_LINE, CERTIFICATION, CERT_DATE, PART, PART_LOC, QUANTITY, FILLER2, HOLD_AT_SEQ, COMMENT, LBL_FLAG, FILLER3) values('{0}','{1}','{2}','{3}','{4}','{5}','{6}','{7}','{8}','{9}','{10}','{11}','{12}','{13}','{14}','{15}','{16}','{17}','{18}','{19}','{20}','{21}','{22}','{23}','{24}','{25}','{26}','{27}','{28}','','{29}');", V.DataTable.dtJobSerial(0).JOB!FieldValTrim, V.DataTable.dtJobSerial(0).SUFFIX!FieldValTrim, V.DataTable.dtJobSerial(0).SEQUENCE!FieldValTrim, V.DataTable.dtJobSerial(0).SERIAL_START!FieldValTrim, V.DataTable.dtJobSerial(0).DATE_SERIAL!FieldValTrim, V.DataTable.dtJobSerial(0).TIME_SERIAL!FieldValTrim, V.DataTable.dtJobSerial(0).SERIAL_END!FieldValTrim, V.DataTable.dtJobSerial(0).SERIAL_PREFIX!FieldValTrim, V.DataTable.dtJobSerial(0).FLAG_STATUS!FieldValTrim, V.DataTable.dtJobSerial(0).FLAG_ACTIVE!FieldValTrim, V.DataTable.dtJobSerial(0).JOBS_COUNT!FieldValTrim, V.DataTable.dtJobSerial(0).JOBS_REASON!FieldValTrim, V.DataTable.dtJobSerial(0).USERID!FieldValTrim, V.DataTable.dtJobSerial(0).JOB_MLO!FieldValTrim, V.DataTable.dtJobSerial(0).FILLER!FieldValTrim, V.DataTable.dtJobSerial(0).LOT!FieldValTrim, V.DataTable.dtJobSerial(0).BIN!FieldValTrim, V.DataTable.dtJobSerial(0).HEAT!FieldValTrim, V.DataTable.dtJobSerial(0).SERIAL!FieldValTrim, V.DataTable.dtJobSerial(0).PO!FieldValTrim, V.DataTable.dtJobSerial(0).PO_LINE!FieldValTrim, V.DataTable.dtJobSerial(0).CERTIFICATION!FieldValTrim, V.DataTable.dtJobSerial(0).CERT_DATE!FieldValTrim, V.DataTable.dtJobSerial(0).PART!FieldValTrim, V.DataTable.dtJobSerial(0).PART_LOC!FieldValTrim, V.DataTable.dtJobSerial(0).QUANTITY!FieldVal, V.DataTable.dtJobSerial(0).FILLER2!FieldValTrim, V.DataTable.dtJobSerial(0).HOLD_AT_SEQ!FieldValTrim, V.DataTable.dtJobSerial(0).COMMENT!FieldValTrim, V.DataTable.dtJobSerial(0).FILLER3!FieldValTrim,V.Local.sSQL)
+			F.ODBC.Connection!Conx.Execute(V.Local.sSQL)
+		F.Intrinsic.Control.EndIf
+		f.Data.DataTable.Close("dtJobSerial")
+		
+		'WO_USER_FLDS
+		F.intrinsic.String.Build("INSERT INTO WO_USER_FLDS SELECT * FROM WO_HST_USR_FLD WHERE JOB = '{0}' AND SUFFIX = '{1}';",V.DataTable.dtWOs(V.Local.iCounter).JOB!FieldValTrim, V.DataTable.dtWOs(V.Local.iCounter).SUFFIX!FieldValTrim,V.Local.sSQL)
+		F.ODBC.Connection!conx.Execute(V.Local.sSQL)
+		''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+		
+		'Deleting WO from history tables
+		'JOB_HIST_MAST
+		F.intrinsic.String.Build("DELETE FROM JOB_HIST_MAST WHERE JOB = '{0}' AND SUFFIX = '{1}';",V.DataTable.dtWOs(V.Local.iCounter).JOB!FieldValTrim, V.DataTable.dtWOs(V.Local.iCounter).SUFFIX!FieldValTrim,V.Local.sSQL)
+		F.ODBC.Connection!conx.Execute(V.local.sSQL)
+		'JOB_HIST_OPS
+		F.intrinsic.String.Build("DELETE FROM JOB_HIST_OPS WHERE JOB = '{0}' AND SUFFIX = '{1}';",V.DataTable.dtWOs(V.Local.iCounter).JOB!FieldValTrim, V.DataTable.dtWOs(V.Local.iCounter).SUFFIX!FieldValTrim,V.Local.sSQL)
+		F.ODBC.Connection!conx.Execute(V.local.sSQL)
+		'JOB_HIST_DTL
+		F.intrinsic.String.Build("DELETE FROM JOB_HIST_DTL WHERE JOB = '{0}' AND SUFFIX = '{1}';",V.DataTable.dtWOs(V.Local.iCounter).JOB!FieldValTrim, V.DataTable.dtWOs(V.Local.iCounter).SUFFIX!FieldValTrim,V.Local.sSQL)
+		F.ODBC.Connection!conx.Execute(V.local.sSQL)
+		'JOB_DTL_SUPP_H
+		F.intrinsic.String.Build("DELETE FROM JOB_DTL_SUPP_H WHERE JOB = '{0}' AND SUFFIX = '{1}';",V.DataTable.dtWOs(V.Local.iCounter).JOB!FieldValTrim, V.DataTable.dtWOs(V.Local.iCounter).SUFFIX!FieldValTrim,V.Local.sSQL)
+		F.ODBC.Connection!conx.Execute(V.local.sSQL)
+		'JOB_DTL_H_NOTES
+		F.intrinsic.String.Build("DELETE FROM JOB_DTL_H_NOTES WHERE JOB = '{0}' AND SUFFIX = '{1}';",V.DataTable.dtWOs(V.Local.iCounter).JOB!FieldValTrim, V.DataTable.dtWOs(V.Local.iCounter).SUFFIX!FieldValTrim,V.Local.sSQL)
+		F.ODBC.Connection!conx.Execute(V.Local.sSQL)
+		'WO_H_SEQ_COMMENTS
+		F.intrinsic.String.Build("DELETE FROM WO_H_SEQ_COMMENTS WHERE WO = '{0}' AND WO_SUFFIX = '{1}';",V.DataTable.dtWOs(V.Local.iCounter).JOB!FieldValTrim, V.DataTable.dtWOs(V.Local.iCounter).SUFFIX!FieldValTrim,V.Local.sSQL)
+		F.ODBC.Connection!conx.Execute(V.Local.sSQL)
+		
+		'Extra tables
+		'JOB_SERIAL
+		F.intrinsic.String.Build("DELETE FROM JOB_SERIAL_HIS WHERE JOB = '{0}' AND SUFFIX = '{1}';",V.DataTable.dtWOs(V.Local.iCounter).JOB!FieldValTrim, V.DataTable.dtWOs(V.Local.iCounter).SUFFIX!FieldValTrim,V.Local.sSQL)
+		F.ODBC.Connection!conx.Execute(V.Local.sSQL)
+		'WO_USER_FLDS
+		F.intrinsic.String.Build("DELETE FROM WO_HST_USR_FLD WHERE JOB = '{0}' AND SUFFIX = '{1}';",V.DataTable.dtWOs(V.Local.iCounter).JOB!FieldValTrim, V.DataTable.dtWOs(V.Local.iCounter).SUFFIX!FieldValTrim,V.Local.sSQL)
+		F.ODBC.Connection!conx.Execute(V.Local.sSQL)
+		''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+		
+	F.Intrinsic.Control.Next(V.Local.iCounter)
+	
+	F.Intrinsic.UI.ChangeWaitStatus("Reactivation Completed....",100)
+	F.Intrinsic.UI.CloseWaitDialog
+	
+	'Displaying msgbox and unloading
+	F.Intrinsic.UI.Msgbox("Work Order(s) have been reactivated.","Complete")
+	F.Intrinsic.Control.CallSub("Unload_Form")
+		
+F.Intrinsic.Control.Catch
+
+	F.Intrinsic.Control.CallSub(CatchError)
+
+F.Intrinsic.Control.EndTry
+Program.Sub.Update_ByWO.End
+
+Program.Sub.cmd_click_JobBrowser.Start
+F.Intrinsic.Control.Try
+
+	V.Local.sRet.Declare(String)
+	V.Local.sTitles.Declare(String)
+	V.Local.iWidths.Declare(Long)
+	
+	'Displaying browser with all WOs purged to history
+	F.Intrinsic.String.Split("Job*!*Suffix*!*Part*!*Description*!*Customer*!*Date Closed","*!*", V.Local.sTitles)
+	F.Intrinsic.String.Split("1000*!*800*!*2000*!*3000*!*800*!*1200","*!*",V.Local.iWidths)
+	F.Intrinsic.UI.Browser("Select a Work Order: ","conx","Select Job, Suffix, Part, Description, Customer, Date_Closed From V_JOB_HIST_MAST;",V.Local.sTitles,V.Local.iWidths,V.Local.sRet)
+	
+	F.Intrinsic.Control.If(V.Local.sRet.IsNotCancel)
+	
+		F.Intrinsic.String.Split(V.Local.sRet,"*!*",V.Local.sRet)
+		Gui.frmWO.txtJob.Text(V.Local.sRet(0).Trim)
+		Gui.frmWO.txtEndJob.Text(V.Local.sRet(0).Trim)
+		
+		Gui.frmWO.txtSuf.Text(V.Local.sRet(1).Trim)
+		Gui.frmWO.txtEndSuf.Text(V.Local.sRet(1).Trim)
+	
+	F.Intrinsic.Control.Else
+		
+		'Displaying error message
+		F.Intrinsic.UI.Msgbox("A WO must be selected to continue.", "ERROR")
+		
+	F.Intrinsic.Control.EndIf
+
+F.Intrinsic.Control.Catch
+
+	F.Intrinsic.Control.CallSub(CatchError)
+
+F.Intrinsic.Control.EndTry
+Program.Sub.cmd_click_JobBrowser.End
+
+Program.Sub.Unload_Form.Start
+F.Intrinsic.Control.Try
+
+	'Making form invisible
+	gui.frmWO..Visible(False)
+	
+	'Closes the connection if it is open
+	f.Intrinsic.Control.If(v.ODBC.conx.exists,=,"1") 	
+	    f.ODBC.Connection!conx.Close
+	f.Intrinsic.Control.EndIf
+	
+	'Ending program
+	F.Intrinsic.Control.End
+
+F.Intrinsic.Control.Catch
+
+	F.Intrinsic.Control.CallSub(CatchError)
+
+F.Intrinsic.Control.EndTry
+Program.Sub.Unload_Form.End
+
+Program.Sub.CatchError.Start
+'To display the error
+F.Intrinsic.String.Build("Project: {0}{1}{1}Subroutine: {2}{1}Error Occurred {3} with description {4}{1}{1}GAB Version: {5}", V.Ambient.ScriptPath, V.Ambient.Newline, V.Ambient.SubroutineCalledFrom, V.Ambient.ErrorNumber, V.Ambient.ErrorDescription, V.Ambient.GABVersion, V.Global.sError) 
+F.Intrinsic.UI.Msgbox(V.Global.sError)
+F.Intrinsic.Control.CallSub("Unload_Form")
+Program.Sub.CatchError.End
+
+Program.Sub.cmdEndWO_Click.Start
+F.Intrinsic.Control.Try
+
+	V.Local.sRet.Declare(String)
+	V.Local.sTitles.Declare(String)
+	V.Local.iWidths.Declare(Long)
+	
+	'Displaying browser with all WOs purged to history
+	F.Intrinsic.String.Split("Job*!*Suffix*!*Part*!*Description*!*Customer*!*Date Closed","*!*", V.Local.sTitles)
+	F.Intrinsic.String.Split("1000*!*800*!*2000*!*3000*!*800*!*1200","*!*",V.Local.iWidths)
+	F.Intrinsic.UI.Browser("Select a Work Order: ","conx","Select Job, Suffix, Part, Description, Customer, Date_Closed From V_JOB_HIST_MAST;",V.Local.sTitles,V.Local.iWidths,V.Local.sRet)
+	
+	F.Intrinsic.Control.If(V.Local.sRet.IsNotCancel)
+	
+		F.Intrinsic.String.Split(V.Local.sRet,"*!*",V.Local.sRet)
+		Gui.frmWO.txtEndJob.Text(V.Local.sRet(0).Trim)
+		Gui.frmWO.txtEndSuf.Text(V.Local.sRet(1).Trim)
+	
+	F.Intrinsic.Control.Else
+		
+		'Displaying error message
+		F.Intrinsic.UI.Msgbox("A WO must be selected to continue.", "ERROR")
+		
+	F.Intrinsic.Control.EndIf
+
+F.Intrinsic.Control.Catch
+
+	F.Intrinsic.Control.CallSub(CatchError)
+
+F.Intrinsic.Control.EndTry
+Program.Sub.cmdEndWO_Click.End
+
+Program.Sub.chkSearchByProject_Change.Start
+'This subroutine enables controls to search WOs by project number
+F.Intrinsic.Control.If(V.Screen.frmWO!chkSearchByProject.Value, =, 1)
+	GUI.frmWO.frameByWO.Enabled(False)
+	GUI.frmWO.frameByProject.Enabled(True)
+F.Intrinsic.Control.Else
+	GUI.frmWO.frameByWO.Enabled(True)
+	GUI.frmWO.frameByProject.Enabled(False)
+F.Intrinsic.Control.EndIf
+Program.Sub.chkSearchByProject_Change.End
+
+Program.Sub.cmdBegProject_Click.Start
+F.Intrinsic.Control.Try
+
+	V.Local.sRet.Declare(String)
+	V.Local.sTitles.Declare(String)
+	V.Local.iWidths.Declare(Long)
+	
+	'Displaying browser with all project numbers associated with purged WOs
+	F.Intrinsic.String.Split("Project","*!*", V.Local.sTitles)
+	F.Intrinsic.String.Split("800","*!*",V.Local.iWidths)
+	F.Intrinsic.UI.Browser("Select a Project whose associated WOs you want to reactivate: ","conx","select distinct PROJECT from V_JOB_HIST_MAST where PROJECT <> '';",V.Local.sTitles,V.Local.iWidths,V.Local.sRet)
+	
+	F.Intrinsic.Control.If(V.Local.sRet.IsNotCancel)
+	
+		Gui.frmWO.txtBegProject.Text(V.Local.sRet)
+		
+	F.Intrinsic.Control.Else
+		
+		'Displaying error message
+		F.Intrinsic.UI.Msgbox("A project must be selected to continue.", "ERROR")
+		
+	F.Intrinsic.Control.EndIf
+
+F.Intrinsic.Control.Catch
+
+	F.Intrinsic.Control.CallSub(CatchError)
+
+F.Intrinsic.Control.EndTry
+Program.Sub.cmdBegProject_Click.End
+
+Program.Sub.Comments.Start
+${$0$}$$}$$}$12:00:00 AM$}$False
+${$5$}$2.0.0.0$}$2
+${$6$}$apadilla$}$20221109091624723$}$Lag9STqBJOmNXSbd5+msRcBWPGz0aFqSmhrQDKqKcnXIUX7SG6C2Y6XWUDhjUKRAGe8V3fti/HZrPKYCaS+D7A==
+Program.Sub.Comments.End
